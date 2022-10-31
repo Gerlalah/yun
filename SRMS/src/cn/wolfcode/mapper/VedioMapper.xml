@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wolfcode.dao.VedioDao">
+
+
+    <insert id="insertVedio" parameterType="cn.wolfcode.entity.T_Vedio">
+        insert into t_vedio(vname,vsize,vtype,vclass,vtime,vurl)
+        value(#{vname},#{vsize},#{vtype},#{vclass},#{vtime},#{vurl})
+    </insert>
+    <update id="updateVedio" parameterType="cn.wolfcode.entity.T_Vedio">
+        update t_vedio
+        <set>
+            <if test="vname!=null">
+                vname=#{vname},
+            </if>
+            <if test="vclass!=null">
+                vclass=#{vclass},
+            </if>
+            <if test="vstatus!=null">
+                vstatus=#{vstatus},
+            </if>
+            <if test="vtime!=null">
+                vtime=#{vtime},
+            </if>
+            <if test="vview!=null">
+                vview=#{vview}
+            </if>
+        </set>
+        where vcode=#{vcode}
+    </update>
+    <update id="updateVedioStatus" parameterType="java.util.Map">
+        update t_vedio
+        set vstatus=#{status}
+        where vcode=#{vcode}
+    </update>
+    <delete id="deleteVedio">
+        delete from t_vedio
+        where vcode=#{vcode}
+    </delete>
+    <select id="selectVedios" resultType="cn.wolfcode.entity.T_Vedio">
+        select *
+        from t_vedio
+    </select>
+    <select id="selectVedioByConditions" parameterType="java.lang.Integer" resultType="cn.wolfcode.entity.T_Vedio">
+        select *
+            from t_vedio
+        <where>
+            <if test="vname!=null and vname!=''">
+                vname like concat('%',#{vname},'%')
+            </if>
+            <if test="vclass!=null">
+                or (vclass=#{vclass}
+            </if>
+            <if test="vstatus!=null">
+                and vstatus=#{vstatus})
+            </if>
+        </where>
+    </select>
+    <select id="selectVedio" resultType="cn.wolfcode.entity.T_Vedio">
+        select *
+        from t_vedio
+        where vcode=#{vcode}
+    </select>
+
+</mapper>

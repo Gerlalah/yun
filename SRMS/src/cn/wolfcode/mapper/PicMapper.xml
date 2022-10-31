@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wolfcode.dao.PictureDao">
+
+
+    <insert id="addpic">
+        insert into t_pic(pname,pclass,pstatus,ptime,pauthor)
+            value(#{pname},#{pclass},#{pstatus},#{ptime},#{pauthor})
+    </insert>
+    <update id="updatepic">
+        update t_pic
+        <set>
+            <if test="pname!=null">
+                pname=#{pname},
+            </if>
+            <if test="pclass!=null">
+                pclass=#{pclass},
+            </if>
+            <if test="pstatus!=null">
+                pstatus=#{pstatus},
+            </if>
+            <if test="ptime!=null">
+                ptime=#{ptime},
+            </if>
+            <if test="pauthor!=null">
+                pauthor=#{pauthor}
+            </if>
+        </set>
+        where pcode=#{pcode}
+    </update>
+    <delete id="deletepic" parameterType="java.lang.Integer">
+        delete from t_pic
+        where pcode=#{pcode}
+    </delete>
+    <select id="selectpic" resultType="cn.wolfcode.entity.T_Pic">
+        select *
+        from t_pic
+    </select>
+</mapper>

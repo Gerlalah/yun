@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wolfcode.dao.RoleDao">
+
+    <insert id="addRole" parameterType="cn.wolfcode.entity.T_Role">
+        insert into t_role (rname,rdesc)
+        value(#{rname},#{rdesc})
+    </insert>
+
+    <select id="selectRoleByCondition" parameterType="java.lang.String" resultType="cn.wolfcode.entity.T_Role">
+        select * from t_role where rname=#{str}
+    </select>
+
+    <select id="selectAllRole" resultType="cn.wolfcode.entity.T_Role">
+        select * from t_role
+    </select>
+
+    <delete id="deleteRole" parameterType="java.lang.Integer">
+        delete from t_role where rid=#{rid}
+    </delete>
+
+    <select id="selectIdRole" parameterType="java.lang.Integer" resultType="cn.wolfcode.entity.T_Role">
+        select * from t_role where rid=#{rid}
+    </select>
+
+    <update id="updateRole" parameterType="cn.wolfcode.entity.T_Role">
+        update t_role set rname=#{rname},rdesc=#{rdesc} where rid=#{rid}
+    </update>
+</mapper>

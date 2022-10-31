@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wolfcode.dao.UserDao">
+
+
+    <select id="selectUserByCondition" parameterType="java.lang.String" resultType="cn.wolfcode.entity.T_User">
+        select * from t_user where ucode=#{str} or uphone=#{str}
+    </select>
+
+    <update id="updateUser" parameterType="java.util.Map" >
+        update t_user set ustatus=#{ustatus} where ucode=#{ucode}
+    </update>
+
+
+
+    <insert id="userAdd" parameterType="cn.wolfcode.entity.T_User">
+        insert into t_user(ucode,uname,upwd,usex,ubirthday,uphone,uaddress,rid)
+        values (#{ucode},#{uname},#{upwd},#{usex},#{ubirthday},#{uphone},#{uaddress},#{rid})
+    </insert>
+
+    <select id="selectAll" resultType="cn.wolfcode.entity.T_User">
+        select * from t_user
+    </select>
+
+    <!--    <select id="userDetails" parameterType="java.lang.String" resultType="cn.wolfcode.entity.T_User">-->
+    <!--        select * from t_user where ucode=#{ucode}-->
+    <!--    </select>-->
+    <select id="select" parameterType="java.lang.String" resultType="cn.wolfcode.entity.T_User">
+        select * from t_user where uname like #{uname};
+    </select>
+    <delete id="userDelete" parameterType="java.lang.String" >
+        delete  from t_user where ucode=#{ucode}
+    </delete>
+    <update id="updateUserPwd" parameterType="cn.wolfcode.entity.T_User"> update t_user set upwd=#{user.upwd} where ucode=#{user.ucode} </update>
+</mapper>
